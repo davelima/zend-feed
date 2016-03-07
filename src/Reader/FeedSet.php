@@ -64,6 +64,10 @@ class FeedSet extends ArrayObject
      */
     protected function absolutiseUri($link, $uri = null)
     {
+        if (substr($link, 0, 2) == '//') {
+            $link = 'http:' . $link;
+        }
+
         $linkUri = Uri::factory($link);
         if (!$linkUri->isAbsolute() or !$linkUri->isValid()) {
             if ($uri !== null) {
